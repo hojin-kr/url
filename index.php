@@ -2,19 +2,15 @@
 
 require 'vendor/autoload.php';
 
-use Hojin\Url\App\Push;
+use Hojin\Url\App\Redirect;
 use Hojin\Url\DS\Datastore;
-use Hojin\Url\Logger\Logger;
 
-$log = (new Logger)->instance();
-$log->debug("start");
+$requestUri = $_SERVER["REQUEST_URI"] ?? "/";
 
-$data = (new Datastore)->get("test");
-$log->debug("ds get", $data);
-
-
-$app = (new Push);
-
-$app->Redirect($data['target']);
-
-$log->info('Redirect', ["url"=>$data['target']]);
+$redirect = new Redirect;
+if ($redirect->isRedirect($requestUri)) {
+    $data = (new Datastore)->get($requestUri);
+    if ($data['isVaild'] ?? false) {
+        $redirect->Redirect($data["target"]);
+    }
+}
