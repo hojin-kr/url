@@ -10,6 +10,9 @@ class Logger
     public function instance() : \Monolog\Logger
     {
         // config
+        // $isStream = getenv("IS_STREAM_LOG");
+        // $env = getenv("ENV");
+
         $isStream = false;
         $env = "dev";
 
