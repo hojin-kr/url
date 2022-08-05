@@ -25,7 +25,7 @@ class Datastore
     {
         $source64Encoded = base64_encode($source);
         $destination64Encoded = base64_encode($destination);
-        (new Logger)->instance()->info("Datastore set", [$source]);
+        (new Logger)->instance()->info("Datastore set", [$source,$destination]);
         $datastore = new DatastoreClient();
         $key = $datastore->key('url', $source64Encoded);
         $data = $datastore->entity($key);
