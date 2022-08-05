@@ -53,10 +53,10 @@
     }
 
   </style>
-  <title id="title">URL Shortener</title>
+  <title id="title">단축 URL</title>
 </head>
 <body>
-    <H1 id="H1">URL Shortener</H1>
+    <H1 id="H1">단축 URL</H1>
     <div id="create">
         <input id="destination" type="text" placeholder="Origin URL : https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0">
         <input id="source" type="text" placeholder="Custom URL : nasa/article">
@@ -93,6 +93,9 @@
     $("#btn-create").on("click", ()=>{
         let source = $('#source').val()
         let destination = $('#destination').val()
+
+        console.log(source)
+        console.log(destination)
 
         createURL(source, destination)
   })

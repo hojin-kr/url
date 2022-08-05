@@ -33,5 +33,14 @@ if (!empty($_POST)) {
     exit;
 }
 
-// view
-include "src/App/View.php";
+// ipinfo after job view complete
+// $ipinfo = json_decode(file_get_contents("https://api.ip.pe.kr/json"));
+// (new Logger)->instance()->info("IP INFO", [$ipinfo]);
+if (isset($ipinfo->country_code) && $ipinfo->country_code == "KR") {
+    // view
+    include "src/App/ViewKR.php";
+} else {
+    // view
+    include "src/App/View.php";
+}
+
