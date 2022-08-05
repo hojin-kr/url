@@ -17,13 +17,17 @@
     #create {
         display: flex;
         flex-direction: column;
-        width: 50%;
+        width: 70%;
     }
     #destination {
         margin: 1em;
         padding: 1em;
     }
     #source {
+        margin: 1em;
+        padding: 1em;
+    }
+    #result-url {
         margin: 1em;
         padding: 1em;
     }
@@ -36,8 +40,9 @@
         padding: 1em;
     }
     #result {
-        margin: 1em;
-        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        width: 70%;
     }
   </style>
   <title>URL Shortener</title>
@@ -49,14 +54,22 @@
         <input id="source" type="text" placeholder="Custom URL : nasa/article">
         <button id="btn-create">Create</button>
     </div>
-
-
+    <div id="result">
+        <input id="result-url" type="text">
+        <button id="btn-copy">Copy</button>
+    </div>
 </body>
 </html>
 
 <script>
 
     let Domain = "http://localhost:8080"
+
+    init()
+
+    function init() {
+        $('#result').hide()
+    }
 
     $("#btn-create").on("click", ()=>{
         let source = $('#source').val()
@@ -74,9 +87,13 @@
             return 0
         }
 
-        // return 0;
-
         createURL(source, destination)
+  })
+
+  $("#btn-copy").on("click", ()=>{
+    $("#result-url").select();
+    document.execCommand( 'Copy' );
+    alert("Copy")
   })
 
   function createURL(source, destination) {
@@ -88,10 +105,14 @@
     .done(function( msg ) {
       alert(msg);
       let url = Domain + "/" + source
-      $('#create').html('\
-        <input id="result" type="text" value="' + url + '"> \
-        <button id="btn-copy">Copy</button> \
-      ')
+      $("#result-url").val(url)
+      showResult()
     })
   }
+
+  function showResult() {
+    $("#create").hide()
+    $('#result').show()
+  }
+
 </script>
