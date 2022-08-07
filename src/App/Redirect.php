@@ -6,7 +6,7 @@ use Hojin\Url\Logger\Logger;
 
 class Redirect
 {
-    function Redirect($url)
+    function Redirect(string $url)
     {
         (new Logger)->instance()->info("Redirect", [$url]);
         header("Location: $url");
