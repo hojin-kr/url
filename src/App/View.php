@@ -133,7 +133,7 @@
         alert("ERROR : Origin URL")
         return false
     }
-    if (destination.substr(0, 7) != "http://") {
+    if (destination.substr(0, 7) == "http://") {
         alert("ERROR : Origin URL must start with https://")
         return false
     }
