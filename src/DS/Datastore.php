@@ -36,8 +36,8 @@ class Datastore
             $data['destination'] = $destination64Encoded;
             $datastore->insert($data);
         } catch (Exception $e) {
-            return false;
             (new Logger)->instance()->error("ERROR", ["message"=>$e->getMessage()]);
+            return false;
         }
         return true;
     }

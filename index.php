@@ -24,10 +24,14 @@ if ($redirect->isRedirect($requestUri)) {
 if (!empty($_POST)) {
     if (!isset($_POST['source'])) {
         // todo do not set source
+        echo 500;
+        exit;
     }
     validator($_POST['source'], "source");
     if (!isset($_POST['destination'])) {
         // todo do not set destination
+        echo 500;
+        exit;
     }
     validator($_POST['destination'], "destination");
     if (!(new Datastore)->set($_POST['source'], $_POST['destination'])) {

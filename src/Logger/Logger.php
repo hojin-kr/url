@@ -13,8 +13,8 @@ class Logger
         // $isStream = getenv("IS_STREAM_LOG");
         // $env = getenv("ENV");
 
-        $isStream = false;
-        $env = "dev";
+        $isStream = true;
+        $env = "live";
 
         $logLevel = MonoLogger::DEBUG;
         if ("live" == $env) {
