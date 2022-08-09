@@ -5,7 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8516954617838123"
+     crossorigin="anonymous"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
     body {
@@ -112,7 +113,7 @@
 
 <script>
 
-    let Domain = "http://localhost:8080"
+    let Domain = "https://url-358416.du.r.appspot.com"
 
     init()
 
@@ -220,22 +221,22 @@
             "label-preview":"URL Preview 👀",
         },
         'KR':{
-            "title":"蹂� 留곹겕 �떎 以꾩씤�떎, 蹂꾨떎以�",
-            "h1":"�윁� 蹂� 留곹겕 �떎 以꾩씤�떎, 蹂꾨떎以� �윁�",
-            "h2":"湲� 留곹겕瑜� 吏㏐쾶",
+            "title":"별 링크 다 줄인다, 별다줄",
+            "h1":"🌟 별 링크 다 줄인다, 별다줄 🌟",
+            "h2":"긴 링크를 짧게",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
-            "btn-create":"以꾩씠湲� �윉�",
-            "btn-copy":"蹂듭궗�븯湲�",
-            "btn-copied":"蹂듭궗�맖, �썝�븯�뒗怨녹뿉 遺숈뿬 �꽔�쑝�꽭�슂",
+            "btn-create":"줄이기 👏",
+            "btn-copy":"복사하기",
+            "btn-copied":"복사됨, 원하는곳에 붙여 넣으세요",
             "article-title-0":"How to use",
             "article-desc-0":"",
             "article-title-1":"Title",
             "article-desc-1":"Desc",
-            "label-destination":"以꾩씪 留곹겕",
-            "label-source":"留뚮뱾 留곹겕",
-            "label-result-url":"�깮�꽦�맂 留곹겕 �윍�",
-            "label-preview":"留곹겕 誘몃━蹂닿린 �윉�",
+            "label-destination":"줄일 링크",
+            "label-source":"만들 링크",
+            "label-result-url":"생성된 링크 🔗",
+            "label-preview":"링크 미리보기 👀",
         },
     }
     $(".locale.title").text(locales[countryCode]["title"])
