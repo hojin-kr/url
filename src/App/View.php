@@ -13,20 +13,12 @@
         flex-direction: column;
         align-items: center;
         font-family: 'Roboto', sans-serif;
-        background-color: #0F4C81;
+        background-color: #F5F5F8;
     }
     #create {
         display: flex;
         flex-direction: column;
-        width: 70%;
-    }
-    .input-type-1 {
-        margin: 1em;
-        padding: 1em;
-    }
-    .btn-type-1 {
-        margin: 1em;
-        padding: 1em;
+        width: 100%;
     }
     #result {
         display: flex;
@@ -40,22 +32,44 @@
         justify-content:space-around;
         margin: 1em;
     }
+    #h1 {
+        margin-bottom: 0.5em;
+    }
+    #h2 {
+        margin-top: 0px;
+    }
+
+    #icon {
+        border-radius: 0.5em;
+        width: 5em;
+        height: 5em;
+        margin: 1em;
+    }
 
     input {
         border: 0px;
         border-radius: 0.5em;
+        padding: 1em;
+        margin: 0.3em 1em 1.5em 1em;
     }
     button {
-        border: 0.1em solid aliceblue;
+        border: 0em solid aliceblue;
         border-radius: 0.5em;
-        background-color: #FF6F61;
-        color: aliceblue;
+        background-color: #FFFFFF;
+        box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
+        padding: 1.5em;
+        margin: 1em;
+        font-weight: 600;
+    }
+    button:hover {
+        background-color: #171D2E;
+        color: #FFFFFF;
     }
     H1 {
-        color: aliceblue;
+
     }
     label {
-        color: aliceblue;
+        font-size: small;
         margin-left: 1em;
     }
 
@@ -63,15 +77,21 @@
   <title id="title" class="locale title"></title>
 </head>
 <body>
-    <H1 id="h1" class="locale h1"></H1>
+    <img id="icon" src="https://storage.googleapis.com/url-358416.appspot.com/static/url-icon.png" alt="none img">
+    <H3 id="h1" class="locale h1"></H3>
+    <p id="h2" class="locale h2"></p>
+    <br>
     <div id="create">
         <label for="detination" class="locale label-destination"></label>
-        <input id="destination" class="locale destination input-type-1" type="text">
+        <input id="destination" class="locale destination" type="text">
         <label for="source" class="locale label-source"></label>
-        <input id="source" class="locale source input-type-1" type="text">
+        <input id="source" class="locale source" type="text">
+        <label for="preview" class="locale label-preview"></label>
+        <input id="preview" class="locale preview" type="text" disabled>
         <button id="btn-create" class="locale btn-create btn-type-1"></button>
     </div>
     <div id="result">
+        <label for="result-url" class="locale label-result-url"></label>
         <input id="result-url" class="input-type-1" type="text">
         <button id="btn-copy" class="locale btn-copy btn-type-1"></button>
         <button id="btn-copied" class="locale btn-copied btn-type-1"></button>
@@ -100,6 +120,7 @@
         $("#result").hide()
         $("#btn-copied").hide()
         getStaticText()
+        $("#preview").val(Domain+"/")
     }
 
     // short url create
@@ -121,6 +142,10 @@
   $("#btn-copied").on("click", ()=>{
     $("#result-url").select();
     document.execCommand( 'Copy' );
+  })
+
+  $("#source").on("keyup", ()=>{
+    $("#preview").val(Domain+"/"+$("#source").val())
   })
 
   // validater URL
@@ -164,15 +189,17 @@
 
   function showResult() {
     $("#create").hide()
-    $('#result').show()
+    $("#preview").hide()
+    $("#result").show()
   }
 
 
-  function getStaticText(countryCode = "US") {
+  function getStaticText(countryCode = "KR") {
     let locales = {
         "US":{
             "title":"URL Shortener",
             "h1":"URL Shortener",
+            "h2":"길고 복잡한 URL을 내가 원하는 대로 줄인다.",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
             "btn-create":"Shorten",
@@ -186,11 +213,27 @@
             "label-source":"Custom URL",
         },
         'KR':{
-            "title":"단축 URL",
+            "title":"별 링크 다 줄인다, 별다줄",
+            "h1":"🌟 별 링크 다 줄인다, 별다줄 🌟",
+            "h2":"긴 링크를 짧게",
+            "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
+            "source":"nasa",
+            "btn-create":"줄이기 👏",
+            "btn-copy":"복사하기",
+            "btn-copied":"복사됨, 원하는곳에 붙여 넣으세요",
+            "article-title-0":"How to use",
+            "article-desc-0":"",
+            "article-title-1":"Title",
+            "article-desc-1":"Desc",
+            "label-destination":"줄일 링크",
+            "label-source":"만들 링크",
+            "label-result-url":"생성된 링크 🔗",
+            "label-preview":"링크 미리보기 👀",
         },
     }
     $(".locale.title").text(locales[countryCode]["title"])
     $(".locale.h1").text(locales[countryCode]["h1"])
+    $(".locale.h2").text(locales[countryCode]["h2"])
     $(".locale.destination").attr("placeholder",locales[countryCode]["destination"])
     $(".locale.source").attr("placeholder",locales[countryCode]["source"])
     $(".locale.btn-create").text(locales[countryCode]["btn-create"])
@@ -198,5 +241,7 @@
     $(".locale.btn-copied").text(locales[countryCode]["btn-copied"])
     $(".locale.label-destination").text(locales[countryCode]["label-destination"])
     $(".locale.label-source").text(locales[countryCode]["label-source"])
+    $(".locale.label-result-url").text(locales[countryCode]["label-result-url"])
+    $(".locale.label-preview").text(locales[countryCode]["label-preview"])
   }
 </script>
