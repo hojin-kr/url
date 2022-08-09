@@ -11,6 +11,7 @@ class Datastore
     public function get(string $source) : ?array
     {
         (new Logger)->instance()->info("Datastore get", [$source]);
+        // todo Cache
         try {
             $datastore = new DatastoreClient();
             $source64Encoded = base64_encode($source);
@@ -29,6 +30,7 @@ class Datastore
         $source64Encoded = base64_encode($source);
         $destination64Encoded = base64_encode($destination);
         (new Logger)->instance()->info("Datastore set", [$source,$destination]);
+        // todo Cache
         try {
             $datastore = new DatastoreClient();
             $key = $datastore->key('url', $source64Encoded);

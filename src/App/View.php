@@ -150,16 +150,12 @@
 
   // validater URL
   function validaterURL(source, destination) {
-    if (source == "") {
-        alert("ERROR : Custom URL")
-        return false
-    }
     if (destination == "") {
-        alert("ERROR : Origin URL")
+        alert("줄일 링크를 확인해주세요")
         return false
     }
-    if (destination.substr(0, 7) == "http://") {
-        alert("ERROR : Origin URL must start with https://")
+    if (source == "") {
+        alert("만들 링크를 확인해주세요")
         return false
     }
     return true
@@ -169,9 +165,14 @@
     if (!validaterURL(source, destination)) {
         return 1;
     }
+    // force https
+    destination = destination.replace(/http:\/\//g, "https://")
+    // attach https
     if (destination.substr(0, 8) != "https://") {
         destination = "https://" + destination
     }
+    // escape space
+    source = source.replace(/ /g, "%20")
     $.ajax({
         method: "POST",
         url: "/",
@@ -182,8 +183,12 @@
             alert("Already used")
             return 1
         }
-      $("#result-url").val(Domain + "/" + source)
-      showResult()
+        // build result URL
+        resultURL = Domain+"/"+source
+        // replace space escape
+        resultURL = resultURL.replace(/\%20/g, " ")
+        $("#result-url").val(resultURL)
+        showResult()
     })
   }
 
@@ -199,7 +204,7 @@
         "US":{
             "title":"URL Shortener",
             "h1":"URL Shortener",
-            "h2":"길고 복잡한 URL을 내가 원하는 대로 줄인다.",
+            "h2":"URL Shortener",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
             "btn-create":"Shorten",
@@ -211,24 +216,26 @@
             "article-desc-1":"Desc",
             "label-destination":"Origin URL",
             "label-source":"Custom URL",
+            "label-result-url":"Created URL 🔗",
+            "label-preview":"URL Preview 👀",
         },
         'KR':{
-            "title":"별 링크 다 줄인다, 별다줄",
-            "h1":"🌟 별 링크 다 줄인다, 별다줄 🌟",
-            "h2":"긴 링크를 짧게",
+            "title":"蹂� 留곹겕 �떎 以꾩씤�떎, 蹂꾨떎以�",
+            "h1":"�윁� 蹂� 留곹겕 �떎 以꾩씤�떎, 蹂꾨떎以� �윁�",
+            "h2":"湲� 留곹겕瑜� 吏㏐쾶",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
-            "btn-create":"줄이기 👏",
-            "btn-copy":"복사하기",
-            "btn-copied":"복사됨, 원하는곳에 붙여 넣으세요",
+            "btn-create":"以꾩씠湲� �윉�",
+            "btn-copy":"蹂듭궗�븯湲�",
+            "btn-copied":"蹂듭궗�맖, �썝�븯�뒗怨녹뿉 遺숈뿬 �꽔�쑝�꽭�슂",
             "article-title-0":"How to use",
             "article-desc-0":"",
             "article-title-1":"Title",
             "article-desc-1":"Desc",
-            "label-destination":"줄일 링크",
-            "label-source":"만들 링크",
-            "label-result-url":"생성된 링크 🔗",
-            "label-preview":"링크 미리보기 👀",
+            "label-destination":"以꾩씪 留곹겕",
+            "label-source":"留뚮뱾 留곹겕",
+            "label-result-url":"�깮�꽦�맂 留곹겕 �윍�",
+            "label-preview":"留곹겕 誘몃━蹂닿린 �윉�",
         },
     }
     $(".locale.title").text(locales[countryCode]["title"])
