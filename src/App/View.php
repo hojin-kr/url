@@ -113,7 +113,7 @@
 
 <script>
 
-    let Domain = "https://url-358416.du.r.appspot.com"
+    let Domain = "https://bdj.app"
 
     init()
 
