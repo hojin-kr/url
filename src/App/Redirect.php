@@ -8,13 +8,12 @@ class Redirect
 {
     function Redirect(string $url)
     {
-        (new Logger)->instance()->info("Redirect", [$url]);
+        (new Logger)->info("redirect", ["url"=>$url]);
         header("Location: $url");
     }
 
     public function isRedirect(string $requestUri) : bool
     {
-        (new Logger)->instance()->debug("requestUri", [$requestUri, count(explode("/", $requestUri)), explode("/", $requestUri)]);
         if (explode("/", $requestUri)[0] != "") {
             return true;
         }

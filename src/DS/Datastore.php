@@ -2,7 +2,6 @@
 namespace Hojin\Url\DS;
 
 use Exception;
-use Google\Cloud\Core\Exception\GoogleException;
 use Google\Cloud\Datastore\DatastoreClient;
 use Hojin\Url\Logger\Logger;
 
@@ -10,7 +9,7 @@ class Datastore
 {
     public function get(string $source) : ?array
     {
-        (new Logger)->instance()->info("Datastore get", [$source]);
+        (new Logger)->info("get/datastore", ["source"=>$source]);
         // todo Cache
         try {
             $datastore = new DatastoreClient();
@@ -18,7 +17,7 @@ class Datastore
             $key = $datastore->key('url', $source64Encoded);
             $entity = $datastore->lookup($key);
         } catch (Exception $e) {
-            (new Logger)->instance()->error("ERROR", ["message"=>$e->getMessage()]);
+            (new Logger)->error("get/datastore", ["message"=>$e->getMessage()]);
         }
         return [
             "destination"=>base64_decode($entity['destination'] ?? ""),
@@ -29,7 +28,7 @@ class Datastore
     {
         $source64Encoded = base64_encode($source);
         $destination64Encoded = base64_encode($destination);
-        (new Logger)->instance()->info("Datastore set", [$source,$destination]);
+        (new Logger)->info("set/datastore", ["source"=>$source,"destination"=>$destination]);
         // todo Cache
         try {
             $datastore = new DatastoreClient();
@@ -38,7 +37,7 @@ class Datastore
             $data['destination'] = $destination64Encoded;
             $datastore->insert($data);
         } catch (Exception $e) {
-            (new Logger)->instance()->error("ERROR", ["message"=>$e->getMessage()]);
+            (new Logger)->error("set/datastore", ["message"=>$e->getMessage()]);
             return false;
         }
         return true;

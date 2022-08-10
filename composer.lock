@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bc31bfc0d0da5b26c210edc41f7313b",
+    "content-hash": "7bb957f75d98edf73288b9fe58a2f73d",
     "packages": [
         {
             "name": "firebase/php-jwt",
@@ -240,6 +240,71 @@
                 "source": "https://github.com/googleapis/google-cloud-php-datastore/tree/v1.16.0"
             },
             "time": "2022-07-29T00:07:49+00:00"
+        },
+        {
+            "name": "google/cloud-logging",
+            "version": "v1.24.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/googleapis/google-cloud-php-logging.git",
+                "reference": "318ed0801f581e6a24150d48475753e8dcd6168c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-logging/zipball/318ed0801f581e6a24150d48475753e8dcd6168c",
+                "reference": "318ed0801f581e6a24150d48475753e8dcd6168c",
+                "shasum": ""
+            },
+            "require": {
+                "google/cloud-core": "^1.39",
+                "google/gax": "^1.1"
+            },
+            "conflict": {
+                "psr/log": ">=3"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0|2.0"
+            },
+            "require-dev": {
+                "erusev/parsedown": "^1.6",
+                "google/cloud-bigquery": "^1.0",
+                "google/cloud-pubsub": "^1.0",
+                "google/cloud-storage": "^1.3",
+                "opis/closure": "^3",
+                "phpdocumentor/reflection": "^3.0||^4.0",
+                "phpunit/phpunit": "^4.8|^5.0|^8.0",
+                "squizlabs/php_codesniffer": "2.*",
+                "yoast/phpunit-polyfills": "^1.0"
+            },
+            "suggest": {
+                "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
+                "ext-protobuf": "Provides a significant increase in throughput over the pure PHP protobuf implementation. See https://cloud.google.com/php/grpc for installation instructions.",
+                "psr/log": "For using the PSR logger"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "id": "cloud-logging",
+                    "target": "googleapis/google-cloud-php-logging.git",
+                    "path": "Logging",
+                    "entry": "src/LoggingClient.php"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Google\\Cloud\\Logging\\": "src",
+                    "GPBMetadata\\Google\\Logging\\": "metadata"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Stackdriver Logging Client for PHP",
+            "support": {
+                "source": "https://github.com/googleapis/google-cloud-php-logging/tree/v1.24.6"
+            },
+            "time": "2022-08-05T00:41:21+00:00"
         },
         {
             "name": "google/common-protos",

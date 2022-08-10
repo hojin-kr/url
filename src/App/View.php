@@ -7,6 +7,7 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8516954617838123"
      crossorigin="anonymous"></script>
+  <link rel=”shortcut icon” href=”static/favicon.ico”>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
     body {
@@ -121,7 +122,6 @@
         $("#result").hide()
         $("#btn-copied").hide()
         getStaticText()
-        $("#preview").val(Domain+"/")
     }
 
     // short url create
@@ -251,5 +251,6 @@
     $(".locale.label-source").text(locales[countryCode]["label-source"])
     $(".locale.label-result-url").text(locales[countryCode]["label-result-url"])
     $(".locale.label-preview").text(locales[countryCode]["label-preview"])
+    $("#preview").val(Domain+"/"+locales[countryCode]["source"])
   }
 </script>

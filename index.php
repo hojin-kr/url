@@ -6,7 +6,7 @@ use Hojin\Url\DS\Datastore;
 use Hojin\Url\Logger\Logger;
 
 $requestUri = substr($_SERVER["REQUEST_URI"] ?? "/", 1);
-(new Logger)->instance()->info("Request Uri", ["requestUri"=>$_SERVER["REQUEST_URI"]]);
+(new Logger)->info("index", ["request"=>$_SERVER["REQUEST_URI"]]);
 
 // if Redirect Request
 $redirect = new Redirect;
