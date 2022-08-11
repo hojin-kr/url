@@ -36,6 +36,28 @@
         flex-direction: column;
         width: 100%;
     }
+    #how {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        margin-top: 3em;
+    }
+    #benefit {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .box {
+        margin: 1em;
+        align-items: center;
+        border: 0em solid aliceblue;
+        border-radius: 0.5em;
+        background-color: #FFFFFF;
+        box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
+        display: flex;
+        flex-direction: column;
+        padding: 0.5em;
+    }
     #notice {
         display: flex;
         flex-direction: row;
@@ -106,6 +128,25 @@
         <input id="result-url" type="text">
         <button id="btn-copy" class="locale btn-copy"></button>
         <button id="btn-copied" class="locale btn-copied"></button>
+    </div>
+    <div id="how">
+        <div class="box">
+            <H3 class="locale how-title"></H3>
+            <div>
+                <p class="locale how-desc-0"></p>
+                <p class="locale how-desc-1"></p>
+                <p class="locale how-desc-2"></p>
+                <p class="locale how-desc-3"></p>
+            </div>
+        </div>
+    </div>
+    <div id="benefit">
+        <div class="box">
+            <H3 class="locale benefit-title"></H3>
+            <p class="locale benefit-desc-0"></p>
+            <p class="locale benefit-desc-1"></p>
+            <p class="locale benefit-desc-2"></p>
+        </div>
     </div>
     <div id="notice">
         <article>
@@ -246,6 +287,15 @@
             "label-source":"만들 링크",
             "label-result-url":"생성된 링크 🔗",
             "label-preview":"링크 미리보기 👀",
+            "how-title":"이용 방법 🎉",
+            "how-desc-0":"Step1. 긴 링크를 붙여넣기",
+            "how-desc-1":"Step2. 만들 링크를 작성",
+            "how-desc-2":"Step3. 미리보기 👀 & 줄이기 👏",
+            "how-desc-3":"Step4. 링크를 어디든 공유하세요 🔗",
+            "benefit-title":"장점",
+            "benefit-desc-0":"랜덤 문자는 🙅‍♂️ 원하는대로 링크 생성 🙆‍♀️",
+            "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
+            "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
         },
     }
     $(".locale.title").text(locales[countryCode]["title"])
@@ -261,5 +311,15 @@
     $(".locale.label-result-url").text(locales[countryCode]["label-result-url"])
     $(".locale.label-preview").text(locales[countryCode]["label-preview"])
     $("#preview").val(Domain+"/"+locales[countryCode]["source"])
+    $(".locale.how-title").text(locales[countryCode]["how-title"])
+    $(".locale.how-desc-0").text(locales[countryCode]["how-desc-0"])
+    $(".locale.how-desc-1").text(locales[countryCode]["how-desc-1"])
+    $(".locale.how-desc-2").text(locales[countryCode]["how-desc-2"])
+    $(".locale.how-desc-3").text(locales[countryCode]["how-desc-3"])
+    $(".locale.benefit-title").text(locales[countryCode]["benefit-title"])
+    $(".locale.benefit-desc-0").text(locales[countryCode]["benefit-desc-0"])
+    $(".locale.benefit-desc-1").text(locales[countryCode]["benefit-desc-1"])
+    $(".locale.benefit-desc-2").text(locales[countryCode]["benefit-desc-2"])
+
   }
 </script>
