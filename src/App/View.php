@@ -231,7 +231,7 @@
     })
     .done(function( msg ) {
         if (msg == 500) {
-            alert("Already used")
+            alert("이미 사용중인 링크")
             return 1
         }
         // build result URL
