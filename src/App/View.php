@@ -148,7 +148,7 @@
     </div>
     <div id="result">
         <label for="result-url" class="locale label-result-url"></label>
-        <input id="result-url input-warp" type="text">
+        <input id="result-url" class="input-warp" type="text">
         <button id="btn-copy" class="locale btn-copy btn-full-large"></button>
         <button id="btn-copied" class="locale btn-copied btn-full-large"></button>
     </div>
