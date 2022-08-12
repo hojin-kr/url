@@ -103,11 +103,10 @@
         border-radius: 0.5em;
         background-color: #FFFFFF;
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
-        padding: 1em;
+        padding: 1.5em;
         margin: 0.3em 1em 1.5em 0em;
         font-weight: 600;
         color: #171D2E;
-        font-size: medium;
     }
 
     .input-warp {
