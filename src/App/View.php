@@ -80,13 +80,13 @@
         margin: 1em;
     }
 
-    input {
-        border: 0px;
-        border-radius: 0.5em;
-        padding: 1.5em;
-        margin: 0.3em 1em 1.5em 1em;
+    #source-warp {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
-    button {
+
+    .btn-full-large {
         border: 0em solid aliceblue;
         border-radius: 0.5em;
         background-color: #FFFFFF;
@@ -97,6 +97,27 @@
         color: #171D2E;
         font-size: medium;
     }
+
+    .btn-inner {
+        border: 0em solid aliceblue;
+        border-radius: 0.5em;
+        background-color: #FFFFFF;
+        box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
+        padding: 1em;
+        margin: 0.3em 1em 1.5em 0em;
+        font-weight: 600;
+        color: #171D2E;
+        font-size: medium;
+    }
+
+    .input-warp {
+        border: 0px;
+        border-radius: 0.5em;
+        padding: 1.5em;
+        margin: 0.3em 1em 1.5em 1em;
+        width: -webkit-fill-available;
+    }
+
     button:hover {
         background-color: #171D2E;
         color: #FFFFFF;
@@ -116,18 +137,21 @@
     <br>
     <div id="create">
         <label for="detination" class="locale label-destination"></label>
-        <input id="destination" class="locale destination" type="text">
+        <input id="destination" class="locale destination input-warp" type="text">
         <label for="source" class="locale label-source"></label>
-        <input id="source" class="locale source" type="text">
+        <div id="source-warp">
+            <input id="source" class="locale source input-warp" type="text">
+            <button id="btn-random" class="locale btn-inner">🔁</button>
+        </div>
         <label for="preview" class="locale label-preview"></label>
-        <input id="preview" class="locale preview" type="text" disabled>
-        <button id="btn-create" class="locale btn-create"></button>
+        <input id="preview" class="locale preview input-warp" type="text" disabled>
+        <button id="btn-create" class="locale btn-create btn-full-large"></button>
     </div>
     <div id="result">
         <label for="result-url" class="locale label-result-url"></label>
-        <input id="result-url" type="text">
-        <button id="btn-copy" class="locale btn-copy"></button>
-        <button id="btn-copied" class="locale btn-copied"></button>
+        <input id="result-url input-warp" type="text">
+        <button id="btn-copy" class="locale btn-copy btn-full-large"></button>
+        <button id="btn-copied" class="locale btn-copied btn-full-large"></button>
     </div>
     <div id="how">
         <div class="box">
@@ -199,6 +223,15 @@
     $("#preview").val(Domain+"/"+$("#source").val())
   })
 
+  $("#btn-random").on("click", ()=>{
+    setRandString()
+  })
+
+  function setRandString() {
+    $("#source").val(generateRandomString(5))
+    $("#preview").val(Domain+"/"+$("#source").val())
+  }
+
   // validater URL
   function validaterURL(source, destination) {
     if (destination == "") {
@@ -206,8 +239,7 @@
         return false
     }
     if (source == "") {
-        alert("만들 링크를 확인해주세요")
-        return false
+        setRandString()
     }
     return true
   }
@@ -249,6 +281,18 @@
     $("#result").show()
   }
 
+  const generateRandomString = (num) => {
+  const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890_-';
+  let result = '';
+  const charactersLength = characters.length;
+  for (let i = 0; i < num; i++) {
+      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  return result;
+}
+
+
 
   function getStaticText(countryCode = "KR") {
     let locales = {
@@ -284,16 +328,16 @@
             "article-title-1":"Title",
             "article-desc-1":"Desc",
             "label-destination":"줄일 링크",
-            "label-source":"만들 링크",
+            "label-source":"커스텀 링크",
             "label-result-url":"생성된 링크 🔗",
             "label-preview":"링크 미리보기 👀",
             "how-title":"이용 방법 🎉",
             "how-desc-0":"Step1. 긴 링크를 붙여넣기",
-            "how-desc-1":"Step2. 만들 링크를 작성",
+            "how-desc-1":"Step2. 커스텀 링크를 작성",
             "how-desc-2":"Step3. 미리보기 👀 & 줄이기 👏",
             "how-desc-3":"Step4. 링크를 어디든 공유하세요 🔗",
             "benefit-title":"장점",
-            "benefit-desc-0":"랜덤 문자는 🙅‍♂️ 원하는대로 링크 생성 🙆‍♀️",
+            "benefit-desc-0":"랜덤 문자 🙆🏻‍♂️ 커스텀 링크 🙆‍♀️",
             "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
             "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
         },
