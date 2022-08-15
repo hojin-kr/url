@@ -204,7 +204,7 @@
         url: "https://api.ip.pe.kr/json",
         })
         .done(function( msg ) {
-            if (msg.country_code != undefined && msg.country_code != "KR") {
+            if (msg.country_code != undefined && msg.country_code == "US") {
                 ContryCode = "US"
                 getStaticText(ContryCode)
             }
