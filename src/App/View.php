@@ -182,19 +182,33 @@
         </article>
 
     </div>
+    <footer>
+        Mailbox jhj377@gmail.com
+    </footer>
 </body>
 </html>
 
 <script>
 
     let Domain = "https://bdj.app"
+    let ContryCode = "KR"
 
     init()
 
     function init() {
         $("#result").hide()
         $("#btn-copied").hide()
-        getStaticText()
+        getStaticText(ContryCode)
+        $.ajax({
+        method: "GET",
+        url: "https://api.ip.pe.kr/json",
+        })
+        .done(function( msg ) {
+            if (msg.country_code != undefined && msg.country_code != "KR") {
+                ContryCode = "US"
+                getStaticText(ContryCode)
+            }
+    })
     }
 
     // short url create
@@ -296,22 +310,31 @@
   function getStaticText(countryCode = "KR") {
     let locales = {
         "US":{
-            "title":"URL Shortener",
-            "h1":"URL Shortener",
-            "h2":"URL Shortener",
+            "title":"Reduce all star links, star line",
+            "h1":"🌟 Reduce all star links, star line 🌟",
+            "h2":"shorten long links",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
-            "btn-create":"Shorten",
-            "btn-copy":"Copy",
-            "btn-copied":"Copied",
+            "btn-create":"cut down 👏",
+            "btn-copy":"to copy",
+            "btn-copied":"Copied, paste wherever you want",
             "article-title-0":"How to use",
             "article-desc-0":"",
             "article-title-1":"Title",
             "article-desc-1":"Desc",
-            "label-destination":"Origin URL",
-            "label-source":"Custom URL",
-            "label-result-url":"Created URL 🔗",
-            "label-preview":"URL Preview 👀",
+            "label-destination":"link to reduce",
+            "label-source":"custom link",
+            "label-result-url":"generated link 🔗",
+            "label-preview":"Link preview 👀",
+            "how-title":"How to use 🎉",
+            "how-desc-0":"Step1. paste long link",
+            "how-desc-1":"Step2. create custom links",
+            "how-desc-2":"Step3. Preview 👀 & cut down 👏",
+            "how-desc-3":"Step4. Share your link anywhere 🔗",
+            "benefit-title":"Advantages",
+            "benefit-desc-0":"random character 🙆🏻‍♂️ custom link 🙆‍♀️",
+            "benefit-desc-1":"Totally free, service fee Zero 💸",
+            "benefit-desc-2":"Unlimited Link Creation, Unlimited Traffic 📈",
         },
         'KR':{
             "title":"별 링크 다 줄인다, 별다줄",
