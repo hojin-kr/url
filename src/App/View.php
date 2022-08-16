@@ -47,8 +47,16 @@
         flex-direction: column;
         width: 100%;
     }
+    #article-title {
+        margin-top: 3em;
+    }
+    #article {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
     .box {
-        margin: 1em;
+        margin: 0.5em;
         align-items: center;
         border: 0em solid aliceblue;
         border-radius: 0.5em;
@@ -56,7 +64,7 @@
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
         display: flex;
         flex-direction: column;
-        padding: 0.5em;
+        padding: 1em;
     }
     #notice {
         display: flex;
@@ -91,7 +99,7 @@
         border-radius: 0.5em;
         background-color: #FFFFFF;
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
-        padding: 2em;
+        padding: 1.5em;
         margin: 1em;
         font-weight: 600;
         color: #171D2E;
@@ -104,7 +112,7 @@
         background-color: #FFFFFF;
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
         padding: 1.5em;
-        margin: 0.3em 1em 1.5em 0em;
+        margin: 0.3em 1em 1em 0em;
         font-weight: 600;
         color: #171D2E;
     }
@@ -113,7 +121,7 @@
         border: 0px;
         border-radius: 0.5em;
         padding: 1.5em;
-        margin: 0.3em 1em 1.5em 1em;
+        margin: 0.3em 1em 1em 1em;
         width: -webkit-fill-available;
     }
 
@@ -151,6 +159,12 @@
         <input id="result-url" class="input-warp" type="text">
         <button id="btn-copy" class="locale btn-copy btn-full-large"></button>
         <button id="btn-copied" class="locale btn-copied btn-full-large"></button>
+    </div>
+    <H2 id="article-title" class="locale article-title"></H2>
+    <div id="article">
+    </div>
+    <div id="article-more">
+        <button id="btn-article-more" class="locale article-more"></button>
     </div>
     <div id="how">
         <div class="box">
@@ -191,25 +205,51 @@
 <script>
 
     let Domain = "https://bdj.app"
-    let ContryCode = "KR"
+    let ContryCode = "US"
+    let now = new Date()
+    let page = now.getFullYear() + "-" + (now.getMonth() + 1)
 
     init()
 
     function init() {
         $("#result").hide()
         $("#btn-copied").hide()
+        locale()
+        getArticle(page)
+    }
+
+    function locale() {
         getStaticText(ContryCode)
+    }
+
+    function getArticle(page) {
         $.ajax({
         method: "GET",
-        url: "https://api.ip.pe.kr/json",
+        url: Domain + "/article/" + page,
         })
         .done(function( msg ) {
-            if (msg.country_code != undefined && msg.country_code == "US") {
-                ContryCode = "US"
-                getStaticText(ContryCode)
+            console.log(msg)
+            let articles = JSON.parse(msg).articles
+            console.log(articles)
+            for (const [key, value] of Object.entries(articles)) {
+                $("#article").append('\
+                    <div class="box">\
+                        <H3>['+ key + '] ' + value.title +'</H3>\
+                        <div>\
+                            <p>'+ value.content +'</p>\
+                        </div>\
+                        <div>\
+                            <button class="btn-share">Share</button>\
+                        </div>\
+                    </div>\
+                ')
             }
-    })
+        })
     }
+
+    $("#btn-article-more").on("click",()=>{
+        getArticle(page)
+    })
 
     // short url create
     $("#btn-create").on("click", ()=>{
@@ -310,22 +350,22 @@
   function getStaticText(countryCode = "KR") {
     let locales = {
         "US":{
-            "title":"Reduce all star links, star line",
-            "h1":"🌟 Reduce all star links, star line 🌟",
-            "h2":"shorten long links",
+            "title":"TL;DR",
+            "h1":"TL;DR",
+            "h2":"Too Long; Didn't Read",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
-            "btn-create":"cut down 👏",
+            "btn-create":"Shorten 👏",
             "btn-copy":"to copy",
             "btn-copied":"Copied, paste wherever you want",
             "article-title-0":"How to use",
             "article-desc-0":"",
             "article-title-1":"Title",
             "article-desc-1":"Desc",
-            "label-destination":"link to reduce",
-            "label-source":"custom link",
+            "label-destination":"Too Long; Didn't Read.",
+            "label-source":"Cool story, bro",
             "label-result-url":"generated link 🔗",
-            "label-preview":"Link preview 👀",
+            "label-preview":"Preview 👀",
             "how-title":"How to use 🎉",
             "how-desc-0":"Step1. paste long link",
             "how-desc-1":"Step2. create custom links",
@@ -335,6 +375,8 @@
             "benefit-desc-0":"random character 🙆🏻‍♂️ custom link 🙆‍♀️",
             "benefit-desc-1":"Totally free, service fee Zero 💸",
             "benefit-desc-2":"Unlimited Link Creation, Unlimited Traffic 📈",
+            "article-title":"Daily News",
+            "article-more":"More",
         },
         'KR':{
             "title":"별 링크 다 줄인다, 별다줄",
@@ -362,6 +404,7 @@
             "benefit-desc-0":"랜덤 문자 🙆🏻‍♂️ 커스텀 링크 🙆‍♀️",
             "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
             "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
+            "article-title":"매일 뉴스",
         },
     }
     $(".locale.title").text(locales[countryCode]["title"])
@@ -386,6 +429,8 @@
     $(".locale.benefit-desc-0").text(locales[countryCode]["benefit-desc-0"])
     $(".locale.benefit-desc-1").text(locales[countryCode]["benefit-desc-1"])
     $(".locale.benefit-desc-2").text(locales[countryCode]["benefit-desc-2"])
+    $(".locale.article-title").text(locales[countryCode]["article-title"])
+    $(".locale.article-more").text(locales[countryCode]["article-more"])
 
   }
 </script>
