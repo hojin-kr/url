@@ -49,7 +49,11 @@ if ($_SERVER['REQUEST_METHOD'] === "POST" && !empty($_POST)) {
     }
     switch ($params[0]) {
         case 'article':
-            (new Article)->set($_POST['title'],$_POST['content'],$_POST['link']);
+            if (!isset($_POST['id'])) {
+                (new Article)->set($_POST);
+            } else {
+                (new Article)->update($_POST);
+            }
             break;
         default:
             // Reserved keyword
