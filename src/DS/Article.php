@@ -33,7 +33,7 @@ class Article
         $service = new Sheets($client);
         try{
             $spreadsheetId = '1wvxEy5jkbaFs3NuQlRtxlRAx_6Qj0ttrKIepPlqAySg';
-            $range = "$page!A1:G1000";
+            $range = "$page!A1:H1000";
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
             $values = $response->getValues();
             if (empty($values)) {
@@ -48,9 +48,10 @@ class Article
                     'id'=>$row[1] ?? "",
                     'title'=>$row[2] ?? "",
                     'content'=>$row[3] ?? "",
-                    'link'=>$row[4] ?? "",
-                    'contry_code'=>$row[5] ?? "",
-                    'created'=>$row[6] ?? "",
+                    'url'=>$row[4] ?? "",
+                    'shorten'=>$row[5] ?? "",
+                    'contry_code'=>$row[6] ?? "",
+                    'created'=>$row[7] ?? "",
                 ];
             }
             return $articles;

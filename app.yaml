@@ -16,7 +16,6 @@ runtime: php74
 env_variables:
   PROJECT_ID: url-358416
   ENV: CLOUD
-  AUTH_CODE: 23omfi2i3or23!!z
 handlers:
 - url: /favicon\.ico
   static_files: favicon.ico

@@ -125,6 +125,14 @@
         width: -webkit-fill-available;
     }
 
+    .share-url {
+        border: 0px;
+        border-radius: 0.5em;
+        box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
+        padding: 1.5em;
+        margin: 0.3em 1em 1em 1em;
+    }
+
     button:hover {
         background-color: #171D2E;
         color: #FFFFFF;
@@ -164,7 +172,7 @@
     <div id="article">
     </div>
     <div id="article-more">
-        <button id="btn-article-more" class="locale article-more"></button>
+        <button id="btn-article-more" class="locale article-more btn-inner"></button>
     </div>
     <div id="how">
         <div class="box">
@@ -205,10 +213,78 @@
 <script>
 
     let Domain = "https://bdj.app"
-    Domain = "http://localhost:8080"
-    let ContryCode = "US"
+
+    let ContryCode = "KR"
     let now = new Date()
     let page = now.getFullYear() + "-" + (now.getMonth() + 1)
+
+    let locales = {
+        "US":{
+            "title":"TL;DR",
+            "h1":"TL; DR",
+            "h2":"Too Long; Didn't Read",
+            "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
+            "source":"nasa",
+            "btn-create":"Shorten 👏",
+            "btn-copy":"to copy",
+            "btn-copied":"Copied, paste wherever you want",
+            "article-title-0":"How to use",
+            "article-desc-0":"",
+            "article-title-1":"Title",
+            "article-desc-1":"Desc",
+            "label-destination":"Too Long; Didn't Read.",
+            "label-source":"Cool story, bro",
+            "label-result-url":"generated link 🔗",
+            "label-preview":"Preview 👀",
+            "how-title":"How to use 🎉",
+            "how-desc-0":"Step1. paste long link",
+            "how-desc-1":"Step2. create custom links",
+            "how-desc-2":"Step3. Preview 👀 & cut down 👏",
+            "how-desc-3":"Step4. Share your link anywhere 🔗",
+            "benefit-title":"Advantages",
+            "benefit-desc-0":"random character 🙆🏻‍♂️ custom link 🙆‍♀️",
+            "benefit-desc-1":"Totally free, service fee Zero 💸",
+            "benefit-desc-2":"Unlimited Link Creation, Unlimited Traffic 📈",
+            "article-title":"Daily News",
+            "article-more":"More",
+            "btn-share":"Share",
+            "alert-link-check":"Watch your link",
+            "already-use":"already used",
+        },
+        'KR':{
+            "title":"TL;DR",
+            "h1":"TL; DR",
+            "h2":"Too Long; Didn't Read",
+            "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
+            "source":"nasa",
+            "btn-create":"줄이기 👏",
+            "btn-copy":"복사하기",
+            "btn-copied":"복사됨, 원하는곳에 붙여 넣으세요",
+            "article-title-0":"How to use",
+            "article-desc-0":"",
+            "article-title-1":"Title",
+            "article-desc-1":"Desc",
+            "label-destination":"줄일 링크",
+            "label-source":"커스텀 링크",
+            "label-result-url":"생성된 링크 🔗",
+            "label-preview":"링크 미리보기 👀",
+            "how-title":"이용 방법 🎉",
+            "how-desc-0":"Step1. 긴 링크를 붙여넣기",
+            "how-desc-1":"Step2. 커스텀 링크를 작성",
+            "how-desc-2":"Step3. 미리보기 👀 & 줄이기 👏",
+            "how-desc-3":"Step4. 링크를 어디든 공유하세요 🔗",
+            "benefit-title":"장점",
+            "benefit-desc-0":"랜덤 문자 🙆🏻‍♂️ 커스텀 링크 🙆‍♀️",
+            "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
+            "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
+            "article-title":"매일 뉴스",
+            "article-more":"더 보기",
+            "btn-share":"공유하기",
+            "alert-link-check":"링크를 확인해주세요",
+            "already-use":"이미 사용중인 링크",
+        },
+    }
+
 
     init()
 
@@ -221,6 +297,16 @@
 
     function locale() {
         getStaticText(ContryCode)
+        $.ajax({
+        method: "GET",
+        url: "https://api.ip.pe.kr/json",
+        })
+        .done(function( msg ) {
+            if (msg.country_code != undefined && msg.country_code == "US") {
+                ContryCode = "US"
+                getStaticText(ContryCode)
+            }
+        })
     }
 
     function getArticle(page) {
@@ -229,25 +315,25 @@
         url: Domain + "/article/" + page,
         })
         .done(function( msg ) {
-            console.log(msg)
             let articles = JSON.parse(msg).articles
-            console.log(articles)
             for (const [key, value] of Object.entries(articles)) {
                 if (ContryCode != value.contry_code) {
                     continue
                 }
                 $("#article").append('\
                     <div class="box">\
-                        <H3>['+ value.created + '] ' + value.title +'</H3>\
+                        <a href="'+ value.url +'"><H3>['+ value.created + '] ' + value.title +'</H3></a>\
                         <div>\
                             <p>'+ value.content +'</p>\
                         </div>\
                         <div>\
-                            <button class="btn-share">Share</button>\
+                            <input class="share-url" type="text" value='+value.shorten+'>\
+                            <button class="locale btn-share btn-inner"></button>\
                         </div>\
                     </div>\
                 ')
             }
+            getStaticText(ContryCode)
         })
     }
 
@@ -262,6 +348,12 @@
 
         createURL(source, destination)
   })
+
+  $(document).on("click", ".btn-share", (event)=>{
+    $(event.target).prev().select();
+    document.execCommand( 'Copy' );
+    alert(locales[ContryCode]["btn-copied"])
+  });
 
   // btn copy
   $("#btn-copy").on("click", ()=>{
@@ -292,7 +384,7 @@
   // validater URL
   function validaterURL(source, destination) {
     if (destination == "") {
-        alert("줄일 링크를 확인해주세요")
+        alert(locales[ContryCode]["alert-link-check"])
         return false
     }
     if (source == "") {
@@ -320,7 +412,7 @@
     })
     .done(function( msg ) {
         if (msg == 500) {
-            alert("이미 사용중인 링크")
+            alert(locales[ContryCode]["already-use"])
             return 1
         }
         // build result URL
@@ -352,65 +444,6 @@
 
 
   function getStaticText(countryCode = "KR") {
-    let locales = {
-        "US":{
-            "title":"TL;DR",
-            "h1":"TL;DR",
-            "h2":"Too Long; Didn't Read",
-            "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
-            "source":"nasa",
-            "btn-create":"Shorten 👏",
-            "btn-copy":"to copy",
-            "btn-copied":"Copied, paste wherever you want",
-            "article-title-0":"How to use",
-            "article-desc-0":"",
-            "article-title-1":"Title",
-            "article-desc-1":"Desc",
-            "label-destination":"Too Long; Didn't Read.",
-            "label-source":"Cool story, bro",
-            "label-result-url":"generated link 🔗",
-            "label-preview":"Preview 👀",
-            "how-title":"How to use 🎉",
-            "how-desc-0":"Step1. paste long link",
-            "how-desc-1":"Step2. create custom links",
-            "how-desc-2":"Step3. Preview 👀 & cut down 👏",
-            "how-desc-3":"Step4. Share your link anywhere 🔗",
-            "benefit-title":"Advantages",
-            "benefit-desc-0":"random character 🙆🏻‍♂️ custom link 🙆‍♀️",
-            "benefit-desc-1":"Totally free, service fee Zero 💸",
-            "benefit-desc-2":"Unlimited Link Creation, Unlimited Traffic 📈",
-            "article-title":"Daily News",
-            "article-more":"More",
-        },
-        'KR':{
-            "title":"별 링크 다 줄인다, 별다줄",
-            "h1":"🌟 별 링크 다 줄인다, 별다줄 🌟",
-            "h2":"긴 링크를 짧게",
-            "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
-            "source":"nasa",
-            "btn-create":"줄이기 👏",
-            "btn-copy":"복사하기",
-            "btn-copied":"복사됨, 원하는곳에 붙여 넣으세요",
-            "article-title-0":"How to use",
-            "article-desc-0":"",
-            "article-title-1":"Title",
-            "article-desc-1":"Desc",
-            "label-destination":"줄일 링크",
-            "label-source":"커스텀 링크",
-            "label-result-url":"생성된 링크 🔗",
-            "label-preview":"링크 미리보기 👀",
-            "how-title":"이용 방법 🎉",
-            "how-desc-0":"Step1. 긴 링크를 붙여넣기",
-            "how-desc-1":"Step2. 커스텀 링크를 작성",
-            "how-desc-2":"Step3. 미리보기 👀 & 줄이기 👏",
-            "how-desc-3":"Step4. 링크를 어디든 공유하세요 🔗",
-            "benefit-title":"장점",
-            "benefit-desc-0":"랜덤 문자 🙆🏻‍♂️ 커스텀 링크 🙆‍♀️",
-            "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
-            "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
-            "article-title":"매일 뉴스",
-        },
-    }
     $(".locale.title").text(locales[countryCode]["title"])
     $(".locale.h1").text(locales[countryCode]["h1"])
     $(".locale.h2").text(locales[countryCode]["h2"])
@@ -435,6 +468,7 @@
     $(".locale.benefit-desc-2").text(locales[countryCode]["benefit-desc-2"])
     $(".locale.article-title").text(locales[countryCode]["article-title"])
     $(".locale.article-more").text(locales[countryCode]["article-more"])
+    $(".locale.btn-share").text(locales[countryCode]["btn-share"])
 
   }
 </script>
