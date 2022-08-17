@@ -322,7 +322,7 @@
                 }
                 $("#article").append('\
                     <div class="box">\
-                        <a href="'+ value.url +'"><H3>['+ value.created + '] ' + value.title +'</H3></a>\
+                        <a href="'+ value.url +'"><H3>'+ value.title +'</H3></a>\
                         <div>\
                             <p>'+ value.content +'</p>\
                         </div>\
