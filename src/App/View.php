@@ -233,9 +233,12 @@
             let articles = JSON.parse(msg).articles
             console.log(articles)
             for (const [key, value] of Object.entries(articles)) {
+                if (ContryCode != value.contry_code) {
+                    continue
+                }
                 $("#article").append('\
                     <div class="box">\
-                        <H3>['+ key + '] ' + value.title +'</H3>\
+                        <H3>['+ value.created + '] ' + value.title +'</H3>\
                         <div>\
                             <p>'+ value.content +'</p>\
                         </div>\

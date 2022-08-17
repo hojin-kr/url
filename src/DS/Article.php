@@ -2,90 +2,62 @@
 namespace Hojin\Url\DS;
 
 use Exception;
-use Google\Cloud\Datastore\DatastoreClient;
+use Google\Client;
+use Google\Service\Sheets;
 use Hojin\Url\Logger\Logger;
 
 class Article
 {
+    const STATUS_DRAFT = 0;
+    const STATUS_LIVE = 1;
 
-    public function get(string $page) : ?array
+    /**
+     * Returns an authorized API client.
+     * @return Client the authorized client object
+     */
+    public function getClient()
+    {
+        $client = new Client();
+        $client->setApplicationName('TLDR');
+        $client->setScopes(Sheets::SPREADSHEETS_READONLY);
+        $client->setAuthConfig('url-358416-56080cd2195d.json');
+        $client->setAccessType('offline');
+        return $client;
+    }
+
+
+    public function get(string $page)
     {
         (new Logger)->info("get/article", ["page"=>$page]);
-        try {
-            $datastore = new DatastoreClient();
-            $key = $datastore->key('article', $page);
-            $entity = $datastore->lookup($key);
-        } catch (Exception $e) {
-            (new Logger)->error("get/article/error", ["page"=>$page, "error"=>$e->getMessage() ?? ""]);
-        }
-        return [
-            "articles"=>json_decode($entity['articles']),
-        ];
-    }
-
-    public function set(array $data) : bool
-    {
-        ["title"=>$title,"content"=>$content, "link"=>$link, "locale"=>$locale, "status"=>$status] = $data;
-        (new Logger)->info("set/article", $data);
-        try {
-            $time = time();
-            $datastore = new DatastoreClient();
-            $key = $datastore->key('article', date("Y-n", $time));
-            $lookup = $datastore->lookup($key);
-            $entity = $datastore->entity($key);
-            if (!empty($lookup) && isset($lookup['articles'])) {
-                $articles = json_decode($lookup['articles'], true);
+        $client = $this->getClient();
+        $service = new Sheets($client);
+        try{
+            $spreadsheetId = '1wvxEy5jkbaFs3NuQlRtxlRAx_6Qj0ttrKIepPlqAySg';
+            $range = "$page!A1:G1000";
+            $response = $service->spreadsheets_values->get($spreadsheetId, $range);
+            $values = $response->getValues();
+            if (empty($values)) {
+                throw new Exception("do not found data");
             }
-            $articles[$time] = [
-                'title'=>$title,
-                'content'=>$content,
-                'link'=>$link,
-                'created'=>$time,
-                'locale'=>$locale,
-                'status'=>$status,
-            ];
-            $entity["articles"] = json_encode($articles);
-            if (!empty($lookup) && isset($lookup['articles'])) {
-                $datastore->upsert($entity);
-            } else {
-                $datastore->insert($entity);
+            $articles = [];
+            foreach ($values as $row) {
+                if ($row[0] == static::STATUS_DRAFT) {
+                    continue;
+                }
+                $articles['articles'][] = [
+                    'id'=>$row[1] ?? "",
+                    'title'=>$row[2] ?? "",
+                    'content'=>$row[3] ?? "",
+                    'link'=>$row[4] ?? "",
+                    'contry_code'=>$row[5] ?? "",
+                    'created'=>$row[6] ?? "",
+                ];
             }
-        } catch (Exception $e) {
-            (new Logger)->error("set/article/error", $data);
-            return false;
+            return $articles;
         }
-        return true;
-    }
-
-    public function update(array $data) : bool
-    {
-        ["title"=>$title,"content"=>$content, "link"=>$link, "id"=>$id, "date"=>$date, "locale"=>$locale, "status"=>$status] = $data;
-        (new Logger)->info("update/article", $data);
-        try {
-            $time = time();
-            $datastore = new DatastoreClient();
-            $key = $datastore->key('article', (isset($date) ? $date : date("Y-n", $time)));
-            $lookup = $datastore->lookup($key);
-            $entity = $datastore->entity($key);
-            $articles = json_decode($lookup['articles'], true);
-            if (!isset($articles[$id])) {
-                throw new Exception("not set article");
-            }
-            $articles[$id] = [
-                'title'=>$title,
-                'content'=>$content,
-                'link'=>$link,
-                'created'=>$time,
-                'locale'=>$locale,
-                'status'=>$status,
-            ];
-            $entity["articles"] = json_encode($articles);
-            $datastore->upsert($entity);
-        } catch (Exception $e) {
-            (new Logger)->error("update/article/error", $data);
-            return false;
+        catch(Exception $e) {
+            (new Logger)->info("get/article/error", ["page"=>$page, "error"=>$e->getMessage()]);
         }
-        return true;
     }
 }
 
