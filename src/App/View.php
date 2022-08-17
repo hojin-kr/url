@@ -205,6 +205,7 @@
 <script>
 
     let Domain = "https://bdj.app"
+    Domain = "http://localhost:8080"
     let ContryCode = "US"
     let now = new Date()
     let page = now.getFullYear() + "-" + (now.getMonth() + 1)
