@@ -212,7 +212,7 @@
 
 <script>
 
-    let Domain = "https://bdj.app"
+    let Domain = "https://tldr3.com"
 
     let ContryCode = "KR"
     let now = new Date()
