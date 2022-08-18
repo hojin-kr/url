@@ -161,6 +161,7 @@
     <img id="icon" src="https://storage.googleapis.com/url-358416.appspot.com/static/url-icon.png" alt="none img">
     <H3 id="h1" class="locale h1"></H3>
     <p id="h2" class="locale h2"></p>
+    <p id="h3" class="locale h3"></p>
     <br>
     <div id="create">
         <label for="detination" class="locale label-destination"></label>
@@ -228,13 +229,14 @@
 
     let ContryCode = "KR"
     let now = new Date()
-    let page = now.getFullYear() + "-" + (now.getMonth() + 1)
+    let page = 0
 
     let locales = {
         "US":{
-            "title":"TL;DR",
+            "title":"TL;DR : Shorten URL",
             "h1":"TL; DR",
             "h2":"Too Long; Didn't Read",
+            "h3":"Share URLs as you want, short, and meaningful.",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
             "btn-create":"Shorten 👏",
@@ -262,11 +264,13 @@
             "btn-share":"Share",
             "alert-link-check":"Watch your link",
             "already-use":"already used",
+            "more-last":"Last news. thank you :)",
         },
         'KR':{
-            "title":"TL;DR",
+            "title":"TL;DR : 단축 URL",
             "h1":"TL; DR",
             "h2":"Too Long; Didn't Read",
+            "h3":"짧고 의미 있는 URL로 줄여서 공유하세요!",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
             "source":"nasa",
             "btn-create":"줄이기 👏",
@@ -294,6 +298,7 @@
             "btn-share":"공유하기",
             "alert-link-check":"링크를 확인해주세요",
             "already-use":"이미 사용중인 링크",
+            "more-last":"마지막 뉴스입니다. 감사합니다 :)"
         },
     }
 
@@ -327,6 +332,11 @@
         url: Domain + "/article/" + page,
         })
         .done(function( msg ) {
+            if (msg == "null") {
+                alert(locales[ContryCode]["more-last"])
+                $("#btn-article-more").prop('disabled', true)
+                return 0
+            }
             let articles = JSON.parse(msg).articles
             for (const [key, value] of Object.entries(articles)) {
                 if (ContryCode != value.contry_code) {
@@ -350,6 +360,7 @@
     }
 
     $("#btn-article-more").on("click",()=>{
+        page = page + 1
         getArticle(page)
     })
 
@@ -459,6 +470,7 @@
     $(".locale.title").text(locales[countryCode]["title"])
     $(".locale.h1").text(locales[countryCode]["h1"])
     $(".locale.h2").text(locales[countryCode]["h2"])
+    $(".locale.h3").text(locales[countryCode]["h3"])
     $(".locale.destination").attr("placeholder",locales[countryCode]["destination"])
     $(".locale.source").attr("placeholder",locales[countryCode]["source"])
     $(".locale.btn-create").text(locales[countryCode]["btn-create"])
