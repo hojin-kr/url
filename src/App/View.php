@@ -5,9 +5,18 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Google tag (gtag.js) tl-dr.in -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-39ZY6ZXD5T"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-39ZY6ZXD5T');
+    </script>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8516954617838123"
      crossorigin="anonymous"></script>
-    <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) tldr3.com -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3LVP1LE67W"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -140,6 +149,9 @@
     label {
         font-size: medium;
         margin-left: 1em;
+    }
+    a {
+        color: #171D2E;
     }
 
   </style>

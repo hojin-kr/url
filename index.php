@@ -6,6 +6,14 @@ use Hojin\Url\DS\Article;
 use Hojin\Url\DS\Url;
 use Hojin\Url\Logger\Logger;
 
+// force tls
+if (empty($_SERVER['HTTPS']) || $_SERVER['HTTPS'] === "off") {
+    if (!in_array($_SERVER['HTTP_HOST'],["localhost:8080"])) {
+        header('Location: '.'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']);
+        exit;
+    }
+}
+
 const RESERVED_KEYWORD = ["article"];
 
 $requestUri = substr($_SERVER["REQUEST_URI"] ?? "/", 1);
