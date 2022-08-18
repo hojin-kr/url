@@ -327,7 +327,7 @@
                             <p>'+ value.content +'</p>\
                         </div>\
                         <div>\
-                            <input class="share-url" type="text" value='+value.shorten+'>\
+                            <input class="share-url" type="text" value='+Domain + value.shorten+'>\
                             <button class="locale btn-share btn-inner"></button>\
                         </div>\
                     </div>\
