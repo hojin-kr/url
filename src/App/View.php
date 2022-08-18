@@ -212,7 +212,7 @@
 
 <script>
 
-    let Domain = window.location.protocol + window.location.hostname
+    let Domain = window.location.protocol + "//" + window.location.hostname
 
     let ContryCode = "KR"
     let now = new Date()
