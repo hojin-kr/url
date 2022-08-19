@@ -32,8 +32,8 @@ class Article
         $client = $this->getClient();
         $service = new Sheets($client);
         try{
-            $spreadsheetId = '1wvxEy5jkbaFs3NuQlRtxlRAx_6Qj0ttrKIepPlqAySg';
-            $range = "$page!A1:H1000";
+            $spreadsheetId = '1BRBsOP7iFeTUFTzywqJY0JKYm8rBrREId03iV93WyDU';
+            $range = "0!A1:H1000";
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
             $values = $response->getValues();
             if (empty($values)) {
