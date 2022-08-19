@@ -33,7 +33,7 @@ class Article
         $service = new Sheets($client);
         try{
             $spreadsheetId = '1BRBsOP7iFeTUFTzywqJY0JKYm8rBrREId03iV93WyDU';
-            $range = "0!A1:H1000";
+            $range = "$page!A1:H1000";
             $response = $service->spreadsheets_values->get($spreadsheetId, $range);
             $values = $response->getValues();
             if (empty($values)) {
