@@ -21,7 +21,7 @@ class Logger
             $logging = new LoggingClient([
                 'projectId' => getenv("PROJECT_ID")
             ]);
-            $this->logger = $logging->psrLogger('bdj.app');
+            $this->logger = $logging->psrLogger('tldr');
         } else {
             $logLevel = MonoLogger::DEBUG;
             $isStream = false;
