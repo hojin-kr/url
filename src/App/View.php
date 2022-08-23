@@ -56,6 +56,11 @@
         flex-direction: column;
         width: 100%;
     }
+    #ad {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
     #article-title {
         margin-top: 3em;
     }
@@ -223,12 +228,19 @@
             <p class="locale article-desc-1"></p>
         </article>
     </div>
+    <div id="article">
         <div class="box">
             <H2 id="article-title" class="locale article-title"></H2>
-            <div id="article">
+            <div id="article-appender"></div>
         </div>
     </div>
-
+    <!-- ad recommend -->
+    <!-- <div id="ad">
+        <div class="box">
+            <H3 class="locale ad-cs-title"></H3>
+            <p class="locale ad-cs-desc"></p>
+        </div>
+    </div> -->
     <footer>
         Mailbox: jhj377@gmail.com
     </footer>
@@ -277,6 +289,8 @@
             "alert-link-check":"Watch your link",
             "already-use":"already used",
             "more-last":"Last news. thank you :)",
+            "ad-cs-title":"Advertisement",
+            "ad-cs-desc":"place your ad on this site : jhj377@gmail.com",
         },
         'KR':{
             "title":"TL;DR : 단축 URL",
@@ -310,7 +324,9 @@
             "btn-share":"공유하기",
             "alert-link-check":"링크를 확인해주세요",
             "already-use":"이미 사용중인 링크",
-            "more-last":"마지막 뉴스입니다. 감사합니다 :)"
+            "more-last":"마지막 뉴스입니다. 감사합니다 :)",
+            "ad-cs-title":"광고",
+            "ad-cs-desc":"광고 문의 : jhj377@gmail.com",
         },
     }
 
@@ -344,7 +360,7 @@
             if (ContryCode != value.contry_code) {
                 continue
             }
-            $("#article").append('\
+            $("#article-appender").append('\
                 <div class="box box-border-none">\
                     <a href="'+ value.url +'"><H3>'+ value.title +'</H3></a>\
                     <div>\
@@ -492,6 +508,8 @@
     $(".locale.article-title").text(locales[countryCode]["article-title"])
     $(".locale.article-more").text(locales[countryCode]["article-more"])
     $(".locale.btn-share").text(locales[countryCode]["btn-share"])
+    $(".locale.ad-cs-title").text(locales[countryCode]["ad-cs-title"])
+    $(".locale.ad-cs-desc").text(locales[countryCode]["ad-cs-desc"])
 
   }
 </script>
