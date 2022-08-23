@@ -149,11 +149,6 @@
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
         padding: 1.5em;
         margin: 0.3em 1em 1em 1em;
-        width: 50%;
-    }
-    .share-url-wrap {
-        width: 100%;
-        text-align: center;
     }
 
     button:hover {
