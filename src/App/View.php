@@ -75,6 +75,10 @@
         flex-direction: column;
         padding: 1em;
     }
+    .box-border-none {
+        border: none;
+        box-shadow: none;
+    }
     #notice {
         display: flex;
         flex-direction: row;
@@ -140,6 +144,11 @@
         box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
         padding: 1.5em;
         margin: 0.3em 1em 1em 1em;
+        width: 50%;
+    }
+    .share-url-wrap {
+        width: 100%;
+        text-align: center;
     }
 
     button:hover {
@@ -152,6 +161,10 @@
     }
     a {
         color: #171D2E;
+    }
+    footer {
+        margin: 1em;
+        padding: 1em;
     }
 
   </style>
@@ -181,12 +194,6 @@
         <button id="btn-copy" class="locale btn-copy btn-full-large"></button>
         <button id="btn-copied" class="locale btn-copied btn-full-large"></button>
     </div>
-    <H2 id="article-title" class="locale article-title"></H2>
-    <div id="article">
-    </div>
-    <div id="article-more">
-        <button id="btn-article-more" class="locale article-more btn-inner"></button>
-    </div>
     <div id="how">
         <div class="box">
             <H3 class="locale how-title"></H3>
@@ -215,10 +222,15 @@
             <p class="locale article-title-1"></p>
             <p class="locale article-desc-1"></p>
         </article>
-
     </div>
+        <div class="box">
+            <H2 id="article-title" class="locale article-title"></H2>
+            <div id="article">
+        </div>
+    </div>
+
     <footer>
-        Mailbox jhj377@gmail.com
+        Mailbox: jhj377@gmail.com
     </footer>
 </body>
 </html>
@@ -259,7 +271,7 @@
             "benefit-desc-0":"random character 🙆🏻‍♂️ custom link 🙆‍♀️",
             "benefit-desc-1":"Totally free, service fee Zero 💸",
             "benefit-desc-2":"Unlimited Link Creation, Unlimited Traffic 📈",
-            "article-title":"Daily News",
+            "article-title":"Usage example",
             "article-more":"More",
             "btn-share":"Share",
             "alert-link-check":"Watch your link",
@@ -293,7 +305,7 @@
             "benefit-desc-0":"랜덤 문자 🙆🏻‍♂️ 커스텀 링크 🙆‍♀️",
             "benefit-desc-1":"완전 무료, 서비스 이용료 Zero 💸",
             "benefit-desc-2":"제한 없는 링크 생성, 무제한 트래픽 📈",
-            "article-title":"매일 뉴스",
+            "article-title":"이용 예시",
             "article-more":"더 보기",
             "btn-share":"공유하기",
             "alert-link-check":"링크를 확인해주세요",
@@ -327,36 +339,25 @@
     }
 
     function getArticle(page) {
-        $.ajax({
-        method: "GET",
-        url: Domain + "/article/" + page,
-        })
-        .done(function( msg ) {
-            if (msg == "null") {
-                alert(locales[ContryCode]["more-last"])
-                $("#btn-article-more").prop('disabled', true)
-                return 0
+        let articles = [{"id":"1","title":"스타링크 : 일론 머스크가 위성을 쏳아올린 이유","content":"일론 머스크의 스페이스X 회사는 수천 개의 인공위성을 우주 궤도에 발사했다. 많은 사람들이 하늘에서 그가 쏘아 올린 인공위성을 봤다고 말한다.","url":"https://www.bbc.com/korean/articles/cv249r7kxx7o","shorten":"/a/starlink","contry_code":"KR","created":"2022-08-01"},{"id":"2","title":"Google is teaching robots to think for themselves","content":"I’m standing in a kitchenette at a Google office in Mountain View, California, observing a robot at work. It’s staring at items on a counter: bubbly water, a bag of whole-grain chips, an energy drink, a protein bar.","url":"https://www.fastcompany.com/90779334/google-robot-research-everyday-robots-palm-saycan?utm_source=tldrnewsletter","shorten":"/a/google/robot","contry_code":"US","created":"2022-08-16"},{"id":"3","title":"Git Merge 2022","content":"Git Merge is a two-day conference dedicated to Git—and the people who use it every day. The Call for Speakers is open now!","url":"https://git-merge.com","shorten":"/e/git/merge","contry_code":"US","created":"2022-08-18"},{"id":"4","title":"애플이 디지털 광고 시장에 불러온 나비 효과","content":"2021년 4월, 애플은 개인정보 보호 정책을 업데이트하면서 ‘앱 추적 투명성(ATT)’ 조치를 발표했어요. ATT는 iOS 기기에서 앱을 실행할 때, 앱이 사용자의 개인정보나 다른 앱의 사용 내역을 추적하지 못하도록 하는 건데요.","url":"https://blog.toss.im/article/global-business-lounge-13","shorten":"/a/att","contry_code":"KR","created":"2022-07-28"},{"id":"5","title":"Google Search is changing, in a big way","content":"Google is readying a wide-reaching search engine update that it says will improve the quality and authenticity of results.","url":"https://www.techradar.com/news/google-search-is-changing-in-a-big-way?utm_source=tldrnewsletter","shorten":"/google/search/change","contry_code":"US","created":"2022-08-19"},{"id":"6","title":"Netflix's mobile games are growing","content":"Netflix’s foray into gaming is dead on arrival — at least according to the latest headlines about the company’s first few mobile games.","url":"https://www.protocol.com/entertainment/netflix-games-data-cloud-gaming?utm_source=tldrnewsletter","shorten":"/netflix/games","contry_code":"US","created":"2022-08-19"},{"id":"7","title":"비트코인 2400억원어치 저장된 컴퓨터 버린 남성","content":"약 10년 전 영국 웨일스 뉴포트 지역에 사는 제임스 하웰스(37)는 컴퓨터에 비트코인을 저장했다는 사실을 까맣게 잊은 채 하드 디스크 드라이브를 내다 버렸다.\n","url":"https://www.bbc.com/korean/articles/c4nwl00epqzo","shorten":"/btc/lostman","contry_code":"KR","created":"2022-08-19"},{"id":"8","title":"마음을 읽는 미래 전투기 '템페스트'","content":"현재 영국의 BAE시스템스와 함께 롤스로이스, 유럽의 MDBA, 이탈리아의 레오나르도사 등은 차세대 전투기 '템페스트'를 개발 중이다.\n먼저 템페스트의 주요 특징으로는 인간 조종사의 스트레스가 극심하거나 당황한 상황에서 이들을 돕는 인공지능(AI)을 꼽을 수 있다.","url":"https://www.bbc.com/korean/international-62314682","shorten":"/fighter/tempest","contry_code":"KR","created":"2022-08-19"}]
+        for (const [key, value] of Object.entries(articles)) {
+            if (ContryCode != value.contry_code) {
+                continue
             }
-            let articles = JSON.parse(msg).articles
-            for (const [key, value] of Object.entries(articles)) {
-                if (ContryCode != value.contry_code) {
-                    continue
-                }
-                $("#article").append('\
-                    <div class="box">\
-                        <a href="'+ value.url +'"><H3>'+ value.title +'</H3></a>\
-                        <div>\
-                            <p>'+ value.content +'</p>\
-                        </div>\
-                        <div>\
-                            <input class="share-url" type="text" value='+Domain + value.shorten+'>\
-                            <button class="locale btn-share btn-inner"></button>\
-                        </div>\
+            $("#article").append('\
+                <div class="box box-border-none">\
+                    <a href="'+ value.url +'"><H3>'+ value.title +'</H3></a>\
+                    <div>\
+                        <p>'+ value.content +'</p>\
                     </div>\
-                ')
-            }
-            getStaticText(ContryCode)
-        })
+                    <div class="share-url-wrap">\
+                        <input class="share-url" type="text" value='+Domain + value.shorten+'>\
+                        <button class="locale btn-share btn-inner"></button>\
+                    </div>\
+                </div>\
+            ')
+        }
+        getStaticText(ContryCode)
     }
 
     $("#btn-article-more").on("click",()=>{
@@ -463,8 +464,6 @@
 
   return result;
 }
-
-
 
   function getStaticText(countryCode = "KR") {
     $(".locale.title").text(locales[countryCode]["title"])
