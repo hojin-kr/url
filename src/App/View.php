@@ -223,11 +223,9 @@
             <p class="locale article-desc-1"></p>
         </article>
     </div>
+    <H2 id="article-title" class="locale article-title"></H2>
     <div id="article">
-        <div class="box">
-            <H2 id="article-title" class="locale article-title"></H2>
-            <div id="article-appender"></div>
-        </div>
+        <div id="article-appender"></div>
     </div>
     <!-- ad recommend -->
     <!-- <div id="ad">
