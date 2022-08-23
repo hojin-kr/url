@@ -80,10 +80,6 @@
         flex-direction: column;
         padding: 1em;
     }
-    .box-border-none {
-        border: none;
-        box-shadow: none;
-    }
     #notice {
         display: flex;
         flex-direction: row;
@@ -354,7 +350,7 @@
                 continue
             }
             $("#article-appender").append('\
-                <div class="box box-border-none">\
+                <div class="box">\
                     <a href="'+ value.url +'"><H3>'+ value.title +'</H3></a>\
                     <div>\
                         <p>'+ value.content +'</p>\
