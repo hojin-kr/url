@@ -197,8 +197,8 @@
             <header id="header-logo" class="locale h1"></header>
         </div>
         <div id="header-section-btn">
-            <button id="btn-request" class="btn-small hover locale btn-cs" onclick="location.href='https://litt.ly/world'"></button>
-            <button id="btn-request" class="btn-small hover locale btn-services" onclick="location.href='https://litt.ly/world'"></button>
+            <button class="btn-small hover locale btn-cs" onclick="location.href='https://litt.ly/world'"></button>
+            <button class="btn-small hover locale btn-services" onclick="location.href='https://litt.ly/world'"></button>
         </div>
     </div>
     <img id="icon" src="https://storage.googleapis.com/url-358416.appspot.com/static/url-icon.png" alt="none img">
