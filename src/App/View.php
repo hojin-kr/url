@@ -162,11 +162,45 @@
         margin: 1em;
         padding: 1em;
     }
+    .btn-small {
+            border: 0em solid aliceblue;
+            border-radius: 0.5em;
+            background-color: #FFFFFF;
+            box-shadow: 0.1em 0.1em 0.1em 0.1em #D3D3D3;
+            padding: 0.5em;
+            margin: 0.5em;
+            font-weight: 600;
+            color: #171D2E;
+        }
+    #header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+
+        }
+    #header-logo {
+        margin: 0.5em;
+    }
+    #header-section-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+    }
 
   </style>
   <title id="title" class="locale title"></title>
 </head>
 <body>
+    <div id="header">
+        <div>
+            <header id="header-logo" class="locale h1"></header>
+        </div>
+        <div id="header-section-btn">
+            <button id="btn-request" class="btn-small hover locale btn-cs" onclick="location.href='https://litt.ly/world'"></button>
+            <button id="btn-request" class="btn-small hover locale btn-services" onclick="location.href='https://litt.ly/world'"></button>
+        </div>
+    </div>
     <img id="icon" src="https://storage.googleapis.com/url-358416.appspot.com/static/url-icon.png" alt="none img">
     <H3 id="h1" class="locale h1"></H3>
     <p id="h2" class="locale h2"></p>
@@ -230,9 +264,6 @@
             <p class="locale ad-cs-desc"></p>
         </div>
     </div> -->
-    <footer>
-        Mailbox: jhj377@gmail.com
-    </footer>
 </body>
 </html>
 
@@ -247,7 +278,7 @@
     let locales = {
         "US":{
             "title":"TL;DR : Shorten URL",
-            "h1":"TL; DR",
+            "h1":"TL; DR : URL",
             "h2":"Too Long; Didn't Read",
             "h3":"Share URLs as you want, short, and meaningful.",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
@@ -280,10 +311,12 @@
             "more-last":"Last news. thank you :)",
             "ad-cs-title":"Advertisement",
             "ad-cs-desc":"place your ad on this site : jhj377@gmail.com",
+            "btn-cs":"🤔 Contact us",
+            "btn-services":"👋 services",
         },
         'KR':{
             "title":"TL;DR : 단축 URL",
-            "h1":"TL; DR",
+            "h1":"TL; DR : URL",
             "h2":"Too Long; Didn't Read",
             "h3":"짧고 의미 있는 URL로 줄여서 공유하세요!",
             "destination":"https://www.nasa.gov/feature/additional-artemis-i-test-objectives-to-provide-added-confidence-in-capabilities-0",
@@ -316,6 +349,8 @@
             "more-last":"마지막 뉴스입니다. 감사합니다 :)",
             "ad-cs-title":"광고",
             "ad-cs-desc":"광고 문의 : jhj377@gmail.com",
+            "btn-cs":"🤔 문의하기",
+            "btn-services":"👋 다른 서비스",
         },
     }
 
@@ -499,6 +534,7 @@
     $(".locale.btn-share").text(locales[countryCode]["btn-share"])
     $(".locale.ad-cs-title").text(locales[countryCode]["ad-cs-title"])
     $(".locale.ad-cs-desc").text(locales[countryCode]["ad-cs-desc"])
-
+    $(".locale.btn-cs").text(locales[countryCode]["btn-cs"])
+    $(".locale.btn-services").text(locales[countryCode]["btn-services"])
   }
 </script>
