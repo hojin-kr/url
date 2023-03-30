@@ -201,7 +201,6 @@
             <button class="btn-small hover locale btn-services" onclick="location.href='https://litt.ly/world'"></button>
         </div>
     </div>
-    <img id="icon" src="https://storage.googleapis.com/url-358416.appspot.com/static/url-icon.png" alt="none img">
     <H3 id="h1" class="locale h1"></H3>
     <p id="h2" class="locale h2"></p>
     <p id="h3" class="locale h3"></p>
@@ -223,39 +222,6 @@
         <input id="result-url" class="input-warp" type="text">
         <button id="btn-copy" class="locale btn-copy btn-full-large"></button>
         <button id="btn-copied" class="locale btn-copied btn-full-large"></button>
-    </div>
-    <div id="how">
-        <div class="box">
-            <H3 class="locale how-title"></H3>
-            <div>
-                <p class="locale how-desc-0"></p>
-                <p class="locale how-desc-1"></p>
-                <p class="locale how-desc-2"></p>
-                <p class="locale how-desc-3"></p>
-            </div>
-        </div>
-    </div>
-    <div id="benefit">
-        <div class="box">
-            <H3 class="locale benefit-title"></H3>
-            <p class="locale benefit-desc-0"></p>
-            <p class="locale benefit-desc-1"></p>
-            <p class="locale benefit-desc-2"></p>
-        </div>
-    </div>
-    <div id="notice">
-        <article>
-            <p class="locale article-title-0"></p>
-            <p class="locale article-desc-0"></p>
-        </article>
-        <article>
-            <p class="locale article-title-1"></p>
-            <p class="locale article-desc-1"></p>
-        </article>
-    </div>
-    <H2 id="article-title" class="locale article-title"></H2>
-    <div id="article">
-        <div id="article-appender"></div>
     </div>
     <!-- ad recommend -->
     <!-- <div id="ad">
