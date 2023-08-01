@@ -197,8 +197,8 @@
             <header id="header-logo" class="locale h1"></header>
         </div>
         <div id="header-section-btn">
-            <button class="btn-small hover locale btn-cs" onclick="location.href='https://litt.ly/world'"></button>
-            <button class="btn-small hover locale btn-services" onclick="location.href='https://litt.ly/world'"></button>
+            <button class="btn-small hover locale btn-cs" onclick="location.href='https://www.linkedin.com/in/호진-장-221aa3198'"></button>
+            <button class="btn-small hover locale btn-services" onclick="location.href='https://github.com/hojin-kr'"></button>
         </div>
     </div>
     <H3 id="h1" class="locale h1"></H3>
