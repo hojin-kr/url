@@ -6,7 +6,7 @@
 - Google Datastore (Firesotre datastore mode)
 - PHP
 
-[https://url.tl-dr.in](https://tl-dr.in)   
+[https://url.tl-dr.in](https://url.tl-dr.in)   
 
  ![image](https://user-images.githubusercontent.com/22079767/222944148-2cd15c14-5f5b-4d11-bb9b-4877449a97b5.png)
 
