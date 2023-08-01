@@ -3,7 +3,7 @@
 
 ### Features
 - Goolge Cloud Platfrom AppEngine
-- Google Datastore (Firesotre datastore mode)
+- Google Cloud Platform Datastore (Firestore datastore mode)
 - PHP
 
 [https://url.tl-dr.in](https://url.tl-dr.in)   
